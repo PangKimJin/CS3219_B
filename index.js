@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const db = require('./queries');
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
@@ -11,6 +12,8 @@ let apiRoutes = require("./api-routes");
 app.get('/', (req, res) => {
     res.send('hello world');
 });
+
+app.get('/data', db.getUsers);
 
 app.get('/404', function(req, res, next){
   // trigger a 404 since no other middleware
